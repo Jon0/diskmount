@@ -1,1 +1,1 @@
-cp 45-disk.rules /etc/udev/rules.d/
+cp 44-media.rules /etc/udev/rules.d/
