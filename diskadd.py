@@ -1,11 +1,17 @@
 #!/usr/bin/python3
 
+import time
 import subprocess
 
 def exec_cmd(cmd):
 	env = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	output, errors = env.communicate()
-	return str(output, 'utf-8').strip()
+	result = str(output, 'utf-8').strip()
+	if (len(errors) > 0):
+		result += " err: "
+		result += str(errors, 'utf-8').strip()
+	return result
+
 
 def find_env(keys):
 	for key in keys:
@@ -27,8 +33,11 @@ tempfile.write("device %s @ %s\n" % (label, devpath))
 tempfile.write("exec %s\n" % (mkdir_cmd))
 tempfile.write("exec %s\n" % (mnt_cmd))
 tempfile.write(exec_cmd('env'))
-tempfile.close()
+
 
 if (len(label) > 0 and len(devpath) > 0):
-	exec_cmd(mkdir_cmd)
-	exec_cmd(mnt_cmd)
+	time.sleep(10)
+	tempfile.write(exec_cmd(mkdir_cmd))
+	tempfile.write(exec_cmd(mnt_cmd))
+
+tempfile.close()
