@@ -1,0 +1,1 @@
+cp 45-disk.rules /etc/udev/rules.d/
