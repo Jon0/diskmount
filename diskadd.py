@@ -21,7 +21,8 @@ mkdir_cmd = str("mkdir /media/" + label).strip()
 mnt_cmd = str("mount " + devpath + " /media/" + label).strip()
 
 # write debug file
-tempfile = open('/tmp/devices', 'w')
+logfilename = "/tmp/" + label
+tempfile = open(logfilename, 'w')
 tempfile.write("device %s @ %s\n" % (label, devpath))
 tempfile.write("exec %s\n" % (mkdir_cmd))
 tempfile.write("exec %s\n" % (mnt_cmd))
