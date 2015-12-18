@@ -16,7 +16,7 @@ def find_env(keys):
 
 
 label = find_env(['ID_FS_LABEL', 'ID_FS_UUID'])
-label = find_env(['DEVNAME', 'DEVPATH'])
+devpath = find_env(['DEVNAME', 'DEVPATH'])
 mnt_cmd = str("mount " + devpath + " /media/" + label).strip()
 
 # write debug file
