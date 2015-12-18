@@ -32,7 +32,7 @@ tempfile = open(logfilename, 'w')
 tempfile.write("device %s @ %s\n" % (label, devpath))
 tempfile.write("exec %s\n" % (mkdir_cmd))
 tempfile.write("exec %s\n" % (mnt_cmd))
-tempfile.write(exec_cmd('env'))
+tempfile.write("%s\n" % (exec_cmd('env')))
 
 
 if (len(label) > 0 and len(devpath) > 0):
