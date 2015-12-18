@@ -1,1 +1,1 @@
-SUBSYSTEM=="block", ACTION=="add", NAME="%k", RUN+="/root/diskadd.py"
+SUBSYSTEM=="block", ACTION=="add", NAME="%k", RUN+="/root/diskmount/diskadd.py"
