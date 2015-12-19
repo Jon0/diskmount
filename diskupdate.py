@@ -49,12 +49,15 @@ def apply(action, label, devpath):
 
 
 def read_queue(fname):
-	queue = open(fname, 'rw')
+	queue = open(fname, 'r')
 	for line in queue.readlines():
 		split = line.split(',')
 		if len(split) == 3:
 			apply(split[0].strip(), split[1].strip(), split[2].strip())
+	queue.close()
 
+	# remove content
+	queue = open(fname, 'w')
 	queue.seek(0)
 	queue.truncate()
 	queue.close()
