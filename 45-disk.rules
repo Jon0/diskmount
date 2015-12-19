@@ -1,1 +1,1 @@
-KERNEL=="sd[b-z][0-9]", SUBSYSTEM=="block", NAME="%k", RUN+="/root/diskmount/diskadd.py"
+KERNEL=="sd[b-z][0-9]", SUBSYSTEM=="block", NAME="%k", RUN+="/root/diskmount/diskqueue.py", ENV{SYSTEMD_WANTS}="diskmount.service"

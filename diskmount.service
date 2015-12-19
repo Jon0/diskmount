@@ -1,0 +1,5 @@
+[Unit]
+Description=Mounts connected drives
+
+[Service]
+ExecStart=/root/diskmount/diskupdate.py

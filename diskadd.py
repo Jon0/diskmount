@@ -39,14 +39,14 @@ tempfile = open(logfilename, 'w')
 tempfile.write(action + " device %s @ %s\n" % (label, devpath))
 if (action == "add" and len(label) > 0 and len(devpath) > 0):
 	time.sleep(10)
-	log_exec(tempfile, mkdir_cmd)
-	log_exec(tempfile, mnt_cmd)
-	subprocess.call(['mount', devpath, mntpath])
+	#log_exec(tempfile, mkdir_cmd)
+	#log_exec(tempfile, mnt_cmd)
+	#subprocess.call(['mount', devpath, mntpath])
 
 if (action == "remove" and len(label) > 0 and len(devpath) > 0):
 	time.sleep(10)
-	log_exec(tempfile, umnt_cmd)
-	log_exec(tempfile, rmdir_cmd)
+	#log_exec(tempfile, umnt_cmd)
+	#log_exec(tempfile, rmdir_cmd)
 
 tempfile.write("%s\n" % (exec_cmd('env')))
 tempfile.close()

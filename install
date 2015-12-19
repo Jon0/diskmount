@@ -1,1 +1,3 @@
 cp 45-disk.rules /etc/udev/rules.d/
+cp diskmount.service /etc/systemd/system/
+udevadm control --reload-rules
