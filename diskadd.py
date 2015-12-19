@@ -20,24 +20,30 @@ def find_env(keys):
 			return result
 	return ""
 
+def log_exec(logfile, cmd):
+	logfile.write("exec %s\n" % (cmd))
+	logfile.write("%s\n" % (exec_cmd(cmd)))
 
+action = find_env(['ACTION'])
 label = find_env(['ID_FS_LABEL', 'ID_FS_UUID'])
 devpath = find_env(['DEVNAME', 'DEVPATH'])
-mkdir_cmd = str("mkdir /media/" + label).strip()
-mnt_cmd = str("mount " + devpath + " /media/" + label).strip()
+mntpath = "/media/test/" + label
+mkdir_cmd = str("mkdir " + mntpath).strip()
+mnt_cmd = str("mount " + devpath + " " + mntpath).strip()
+umnt_cmd = str("umount " + mntpath).strip()
 
 # write debug file
-logfilename = "/tmp/" + label
+logfilename = "/tmp/" + label + "-" + action
 tempfile = open(logfilename, 'w')
-tempfile.write("device %s @ %s\n" % (label, devpath))
-tempfile.write("exec %s\n" % (mkdir_cmd))
-tempfile.write("exec %s\n" % (mnt_cmd))
-tempfile.write("%s\n" % (exec_cmd('env')))
-
-
-if (len(label) > 0 and len(devpath) > 0):
+tempfile.write(action + " device %s @ %s\n" % (label, devpath))
+if (action == "add" and len(label) > 0 and len(devpath) > 0):
 	time.sleep(10)
-	tempfile.write(exec_cmd(mkdir_cmd))
-	tempfile.write(exec_cmd(mnt_cmd))
+	log_exec(tempfile, mkdir_cmd)
+	log_exec(tempfile, mnt_cmd)
 
+if (action == "remove" and len(label) > 0 and len(devpath) > 0):
+	time.sleep(10)
+	log_exec(tempfile, umnt_cmd)
+
+tempfile.write("%s\n" % (exec_cmd('env')))
 tempfile.close()
